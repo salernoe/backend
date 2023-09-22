@@ -4,6 +4,18 @@ class DatabaseConnection:
     _connection = None
     _config = None
 
+    config = {
+        'DB_HOST': 'DATABASE_HOST',
+        'DB_USER': 'DATABASE_USERNAME',
+        'DB_PASSWORD': 'DATABASE_PASSWORD',
+        'DB_NAME': 'DATABASE_NAME'
+    }
+    
+    @classmethod
+    def set_config(cls, config):
+        cls.config = config
+
+    
     @classmethod
     def get_connection(cls):
         if cls._connection is None:
@@ -46,3 +58,12 @@ class DatabaseConnection:
         if cls._connection is not None:
             cls._connection.close()
             cls._connection = None
+    @classmethod
+    def cursor(cls):
+        connection = mysql.connector.connect(
+            host=cls.config['DB_HOST'],
+            user=cls.config['DB_USER'],
+            password=cls.config['DB_PASSWORD'],
+            database=cls.config['DB_NAME']
+        )
+        return connection.cursor()
