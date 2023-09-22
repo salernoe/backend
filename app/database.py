@@ -4,16 +4,7 @@ class DatabaseConnection:
     _connection = None
     _config = None
 
-    config = {
-        'DB_HOST': 'DATABASE_HOST',
-        'DB_USER': 'DATABASE_USERNAME',
-        'DB_PASSWORD': 'DATABASE_PASSWORD',
-        'DB_NAME': 'DATABASE_NAME'
-    }
     
-    @classmethod
-    def set_config(cls, config):
-        cls.config = config
 
     
     @classmethod
