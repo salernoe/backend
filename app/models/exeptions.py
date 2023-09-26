@@ -22,6 +22,11 @@ class CustomException(Exception):
 
 class UsuarioNotFound(CustomException):
     def __init__(self, id_usuario):
+        super().__init__(f" User with ID {id_usuario} not found")
+        self.id_usuario = id_usuario.mNotFound(CustomException);
+    
+    
+    """def __init__(self, id_usuario):
         super().__init__(f" Film with ID {id_usuario} not found")
-        self.id_usuario = id_usuario
+        self.id_usuario = id_usuario"""
     
