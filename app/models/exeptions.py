@@ -23,3 +23,4 @@ class UsuarioNotFound(CustomException):
     def __init__(self, id_usuario):
         super().__init__(404, f"User with ID {id_usuario} not found")
         self.id_usuario = id_usuario
+        

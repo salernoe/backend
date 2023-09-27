@@ -7,7 +7,7 @@ import bcrypt
 
 login_bp = Blueprint('login_bp', __name__)
 
-@login_bp.route('/login', methods=['POST'])
+@login_bp.route('/logearse', methods=['POST'])
 def login():
     try:
         # Obtén los datos del formulario de inicio de sesión

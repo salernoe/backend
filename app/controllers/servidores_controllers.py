@@ -1,4 +1,4 @@
-from ..models.servidor_model import Servidor  # Asegúrate de importar la clase correcta
+from ..models.servidor_model import Servidor  
 from flask import request
 from decimal import Decimal
 

@@ -6,6 +6,8 @@ from .models.exeptions import UsuarioNotFound
 from .routes.usuario_bp import usuario_bp
 from .routes.login_bp import login_bp
 from .routes.servidor_bp import servidor_bp
+from .routes.chats_bp import chat_bp
+from .routes.canales_bp import canal_bp
 from .database import DatabaseConnection
 
 def init_app():
@@ -24,8 +26,11 @@ def init_app():
     app.register_blueprint(usuario_bp, url_prefix='/usuario')
     app.register_blueprint(login_bp, url_prefix='/login')
     app.register_blueprint(servidor_bp, url_prefix='/servidor')
-   
-   
+    app.register_blueprint(chat_bp, url_prefix='/chats')
+    app.register_blueprint(canal_bp, url_prefix='/canales')
+    
+    
+    
     return app
 
 

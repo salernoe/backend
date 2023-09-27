@@ -9,3 +9,8 @@ servidor_bp.route('/get_one/<int:id_servidor>', methods=['GET'])(ServidorControl
 servidor_bp.route('/post', methods=['POST'])(ServidorController.create)
 servidor_bp.route('/put/<int:Id_servidor>', methods=['PUT'])(ServidorController.update)
 servidor_bp.route('/delete/<int:Id_servidor>', methods=['DELETE'])(ServidorController.delete)
+from flask import Blueprint, render_template, request, redirect, url_for
+
+
+servidores_bp = Blueprint('servidores_bp', __name__)
+
