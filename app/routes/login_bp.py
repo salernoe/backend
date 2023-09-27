@@ -2,26 +2,33 @@ from flask import Blueprint, request, jsonify
 from ..models.exeptions import UsuarioNotFound 
 from ..database import DatabaseConnection
 
+import bcrypt  
+
 login_bp = Blueprint('login_bp', __name__)
 
-@login_bp.route('/login/<usuario>', methods=['POST'])
+@login_bp.route('/login', methods=['POST'])  # Cambia la URL a /login
 def login():
     try:
         # Obtén los datos del formulario de inicio de sesión
         data = request.get_json()
-        usuario = data.get('usuario')
-        contrasenia = data.get('contrasenia')
+        nombre = data.get('nombre')
+        cantrasenia = data.get('cantrasenia')
 
-        # Consulta la base de datos para verificar las credenciales
-        query = "SELECT nombre FROM usuarios WHERE usuario = %s AND contrasenia = %s"
-        params = (usuario, contrasenia)
+        # Consulta la base de datos para obtener la contraseña almacenada
+        query = "SELECT cantrasenia FROM talkhive.usuarios WHERE nombre = %s"
+        params = (nombre,)
         result = DatabaseConnection.fetch_one(query, params)
 
         if result:
-            nombre_usuario = result[0]
-            return jsonify({'message': f'Inicio de sesión exitoso para {nombre_usuario}'}), 200
+            cantrasenia_hash = result[0]
+
+            # Compara la contraseña ingresada con el hash almacenado
+            if bcrypt.checkpw(cantrasenia.encode('utf-8'), cantrasenia_hash.encode('utf-8')):
+                return jsonify({'message': f'Inicio de sesión exitoso para {nombre}'}), 200
+            else:
+                raise UsuarioNotFound  # Las contraseñas no coinciden
         else:
-            raise UsuarioNotFound
+            raise UsuarioNotFound  # El usuario no se encuentra
 
     except UsuarioNotFound:
         # Maneja la excepción si las credenciales son incorrectas o el usuario no se encuentra
