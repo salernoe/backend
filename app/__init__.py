@@ -5,6 +5,7 @@ from .routes.error_handlers import errors
 from .models.exeptions import UsuarioNotFound
 from .routes.usuario_bp import usuario_bp
 from .routes.login_bp import login_bp
+from .routes.servidor_bp import servidor_bp
 from .database import DatabaseConnection
 
 def init_app():
@@ -22,7 +23,7 @@ def init_app():
 
     app.register_blueprint(usuario_bp, url_prefix='/usuario')
     app.register_blueprint(login_bp, url_prefix='/login')
-    
+    app.register_blueprint(servidor_bp, url_prefix='/servidor')
    
    
     return app
