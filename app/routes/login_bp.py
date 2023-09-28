@@ -19,7 +19,7 @@ def login():
         query = "SELECT cantrasenia FROM talkhive.usuarios WHERE nombre = %s"
         params = (nombre,)
         result = DatabaseConnection.fetch_one(query, params)
-
+        return jsonify({'message': f'Inicio de sesión exitoso para {nombre}'}), 200
         if result:
             cantrasenia_hash = result[0]
 
